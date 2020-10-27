@@ -42,10 +42,12 @@ export const LoginForm = () => {
             body: JSON.stringify(user)
           })
 
-          console.log('Got response.')
-
           if (response.ok) {
-            console.log('Response worked.')
+            // Authenticate the user.
+          } else {
+            // Clear the input fields
+            setEmail('')
+            setPassword('')
           }
         }}
       >
