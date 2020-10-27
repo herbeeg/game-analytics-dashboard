@@ -21,6 +21,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "https://immense-cliffs-10805.herokuapp.com",
   "browserslist": {
     "production": [
       ">0.2%",
