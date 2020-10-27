@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Grid, Header, Icon, Input, Segment } from "semantic-ui-react";
+import { Button, Form, Grid, Header, Input, Message, Segment } from "semantic-ui-react";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -12,18 +12,16 @@ export const LoginForm = () => {
         <Form size='large'>
           <Segment stacked='true'>
             <Form.Field required>
-              <label>Email Address:</label>
               <Input 
                 icon='at' 
                 iconPosition='left' 
-                placeholder='Email' 
+                placeholder='Email address' 
                 value={email} 
                 onChange={e => setEmail(e.target.value)} 
               />
             </Form.Field>
 
             <Form.Field required>
-              <label>Password:</label>
               <Input 
                 type='password'
                 icon='code' 
@@ -35,6 +33,7 @@ export const LoginForm = () => {
             </Form.Field>
 
             <Button 
+              fluid 
               type='submit' 
               onClick={async () => {
                 const user = {email, password};
@@ -59,6 +58,12 @@ export const LoginForm = () => {
             </Button>
           </Segment>
         </Form>
+
+        <Message>
+          <p>
+            New user? <a href='#'>Register here</a>.
+          </p>
+        </Message>
       </Grid.Column>
     </Grid>
   )
