@@ -5,11 +5,9 @@ import { LoginForm } from './components/LoginForm';
 
 function App() {
   return (
-    <div className="App">
-      <Container style={{ marginTop: 40 }}>
-        <LoginForm />
-      </Container>
-    </div>
+    <Container>
+      <LoginForm />
+    </Container>
   );
 }
 

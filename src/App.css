@@ -1,3 +1,7 @@
+body > #root > div .grid {
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }

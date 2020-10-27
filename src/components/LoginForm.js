@@ -6,8 +6,8 @@ export const LoginForm = () => {
   const [password, setPassword] = useState('');
   
   return (
-    <Grid verticalAlign='middle' center>
-      <Grid.Column>
+    <Grid verticalAlign='middle' textAlign='center'>
+      <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2'>Game Analytics Dashboard</Header>
         <Form size='large'>
           <Segment stacked='true'>
