@@ -66,5 +66,5 @@ export const LoginForm = () => {
         </Message>
       </Grid.Column>
     </Grid>
-  )
+  );
 }
