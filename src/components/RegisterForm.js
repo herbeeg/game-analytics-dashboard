@@ -5,6 +5,9 @@ export const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('')
+
+  const [showError, setErrorState] = useState(false)
+  const [errorMessages, setErrorMessage] = useState([])
   
   return (
     <Grid verticalAlign='middle' textAlign='center'>
@@ -39,7 +42,7 @@ export const RegisterForm = () => {
                 icon='code' 
                 iconPosition='left' 
                 placeholder='Confirm password' 
-                value={password} 
+                value={passwordConfirm} 
                 onChange={e => setPasswordConfirm(e.target.value)} 
               />
             </Form.Field>
@@ -50,31 +53,46 @@ export const RegisterForm = () => {
               onClick={async () => {
                 const user = {email, password};
 
-                if (passwordConfirm == password) {
-                  const response = await fetch('/register', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                  })
-  
-                  if (response.ok) {
-                    // Authenticate the user.
-                  } else {
-                    // Clear the input fields
-                    setEmail('')
-                    setPassword('')
-                  }
+                if (! email) {
+                  setErrorState(true)
+                  setErrorMessage(['Missing email address field.'])
                 } else {
-                  // Show validation error
-                }
+                  if (passwordConfirm === password) {
+                    const response = await fetch('/register', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(user)
+                    })
+    
+                    if (response.ok) {
+                      // Authenticate the user.
+                    } else {
+                      // Clear the input fields
+                      setEmail('')
+                      setPassword('')
+                      setPasswordConfirm('')
+                    }
+                  } else {
+                    // Show validation error
+                    setErrorState(true)
+                    setErrorMessage(['Passwords do not match.'])
+                  }
+                }                
               }}
             >
               Register
             </Button>
           </Segment>
         </Form>
+
+        { showError ? (
+          <Message negative>
+            <Message.Header>Registration error</Message.Header>
+            <Message.List items={errorMessages} />
+          </Message>
+        ) : null }
       </Grid.Column>
     </Grid>
   );
