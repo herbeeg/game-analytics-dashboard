@@ -14,7 +14,7 @@ export const RegisterForm = () => {
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2'>Game Analytics Dashboard</Header>
         <Form size='large'>
-          <Segment stacked='true'>
+          <Segment stacked={true}>
             <Form.Field required>
               <Input 
                 icon='at' 
