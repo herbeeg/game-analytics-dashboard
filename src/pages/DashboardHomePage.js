@@ -1,8 +1,12 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Container, Header } from 'semantic-ui-react';
 
 export default function DashboardHome() {
   return (
-    <Header as='h2'>Dashboard Home</Header>
+    <Container>
+      <Header as='h2'>Dashboard Home</Header>
+      <Link to='/login'>Login Here</Link>
+    </Container>
   );
 }
