@@ -2,6 +2,11 @@ body > #root > div .grid {
   height: 100vh;
 }
 
+button.ui.button {
+  background-color: #E4D00A;
+  color: white;
+}
+
 .App {
   text-align: center;
 }
