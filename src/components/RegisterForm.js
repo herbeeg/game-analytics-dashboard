@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Button, Form, Grid, Header, Input, Message, Segment } from "semantic-ui-react";
-import { Link } from 'react-router-dom';
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('')
   
   return (
     <Grid verticalAlign='middle' textAlign='center'>
@@ -33,38 +33,48 @@ export const LoginForm = () => {
               />
             </Form.Field>
 
+            <Form.Field required>
+              <Input 
+                type='password'
+                icon='code' 
+                iconPosition='left' 
+                placeholder='Confirm password' 
+                value={password} 
+                onChange={e => setPasswordConfirm(e.target.value)} 
+              />
+            </Form.Field>
+
             <Button 
               fluid 
               type='submit' 
               onClick={async () => {
                 const user = {email, password};
-                const response = await fetch('/login', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(user)
-                })
 
-                if (response.ok) {
-                  // Authenticate the user.
+                if (passwordConfirm == password) {
+                  const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                  })
+  
+                  if (response.ok) {
+                    // Authenticate the user.
+                  } else {
+                    // Clear the input fields
+                    setEmail('')
+                    setPassword('')
+                  }
                 } else {
-                  // Clear the input fields
-                  setEmail('')
-                  setPassword('')
+                  // Show validation error
                 }
               }}
             >
-              Login
+              Register
             </Button>
           </Segment>
         </Form>
-
-        <Message>
-          <p>
-            New user? <Link to='/register'>Register Here.</Link>
-          </p>
-        </Message>
       </Grid.Column>
     </Grid>
   );
