@@ -8,6 +8,16 @@ export const RegisterForm = () => {
 
   const [showError, setErrorState] = useState(false)
   const [errorMessages, setErrorMessage] = useState([])
+
+  /*
+    Clear the input fields when certain
+    validation criterion are met.
+  */
+  function clearInputFields() {
+    setEmail('')
+    setPassword('')
+    setPasswordConfirm('')
+  }
   
   return (
     <Grid verticalAlign='middle' textAlign='center'>
@@ -52,10 +62,20 @@ export const RegisterForm = () => {
               type='submit' 
               onClick={async () => {
                 const user = {email, password};
+                const passwordMatch = /[a-zA-Z0-9]{8,}$/gm
 
                 if (! email) {
                   setErrorState(true)
                   setErrorMessage(['Missing email address field.'])
+                } else if (! password.match(passwordMatch)) {
+                  setErrorState(true)
+                  setErrorMessage([
+                    'Password must have at least 8 characters.',
+                    'Password must only contain alphanumeric characters.',
+                    'Example: [a-z], [A-Z], [0-9]'
+                  ])
+
+                  clearInputFields()
                 } else {
                   if (passwordConfirm === password) {
                     const response = await fetch('/register', {
@@ -69,12 +89,9 @@ export const RegisterForm = () => {
                     const returnMessage = await response.json()
     
                     if (response.ok) {
-                      // Authenticate the user.
+                      // Redirect to login page.
                     } else if (400 === response.status) {
-                      // Clear the input fields
-                      setEmail('')
-                      setPassword('')
-                      setPasswordConfirm('')
+                      clearInputFields()
 
                       setErrorState(true)
                       setErrorMessage([returnMessage.message])
