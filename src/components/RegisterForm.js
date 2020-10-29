@@ -64,15 +64,20 @@ export const RegisterForm = () => {
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify(user)
-                    })
+                    });
+
+                    const returnMessage = await response.json()
     
                     if (response.ok) {
                       // Authenticate the user.
-                    } else {
+                    } else if (400 === response.status) {
                       // Clear the input fields
                       setEmail('')
                       setPassword('')
                       setPasswordConfirm('')
+
+                      setErrorState(true)
+                      setErrorMessage([returnMessage.message])
                     }
                   } else {
                     // Show validation error
