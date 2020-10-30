@@ -3,6 +3,7 @@ import { Button, Form, Grid, Header, Input, Message, Segment } from "semantic-ui
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
@@ -15,6 +16,7 @@ export const RegisterForm = () => {
   */
   function clearInputFields() {
     setEmail('')
+    setUsername('')
     setPassword('')
     setPasswordConfirm('')
   }
@@ -32,6 +34,16 @@ export const RegisterForm = () => {
                 placeholder='Email address' 
                 value={email} 
                 onChange={e => setEmail(e.target.value)} 
+              />
+            </Form.Field>
+
+            <Form.Field required>
+              <Input 
+                icon='user' 
+                iconPosition='left' 
+                placeholder='Username' 
+                value={username} 
+                onChange={e => setUsername(e.target.value)} 
               />
             </Form.Field>
 
@@ -61,12 +73,15 @@ export const RegisterForm = () => {
               fluid 
               type='submit' 
               onClick={async () => {
-                const user = {email, password};
+                const user = {email, username, password};
                 const passwordMatch = /[a-zA-Z0-9]{8,}$/gm
 
                 if (! email) {
                   setErrorState(true)
                   setErrorMessage(['Missing email address field.'])
+                } else if (! username) {
+                  setErrorState(true)
+                  setErrorMessage(['Missing username field.'])
                 } else if (! password.match(passwordMatch)) {
                   setErrorState(true)
                   setErrorMessage([
