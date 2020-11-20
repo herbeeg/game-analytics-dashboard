@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form, Grid, Header, Input, Message, Segment } from "semantic-ui-react";
+import { Button, Form, Grid, Image, Input, Message, Segment } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
+
+import logo from '../images/quartz_logo_full.png';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +11,7 @@ export const LoginForm = () => {
   return (
     <Grid verticalAlign='middle' textAlign='center'>
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2'>Quartz Game Dashboard</Header>
+        <Image style={{ padding: 10 }} src={logo} centered />
         <Form size='large'>
           <Segment stacked={true}>
             <Form.Field required>
