@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { Button, Form, Grid, Image, Input, Message, Segment } from "semantic-ui-react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import logo from '../images/quartz_logo_full.png';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [redirect, setRedirect] = useState(false);
   
-  return (
+  return redirect ? (
+    // Redirect to dashboard page for authentication
+    <Redirect to='/'></Redirect>
+  ) : (
     <Grid verticalAlign='middle' textAlign='center'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Image style={{ padding: 10 }} src={logo} centered />
@@ -49,7 +54,11 @@ export const LoginForm = () => {
                 })
 
                 if (response.ok) {
-                  // Authenticate the user.
+                  response.json().then( json => {
+                    sessionStorage.setItem('access_token', json['access_token'])
+
+                    setRedirect(true)
+                  })
                 } else {
                   // Clear the input fields
                   setEmail('')
@@ -69,5 +78,5 @@ export const LoginForm = () => {
         </Message>
       </Grid.Column>
     </Grid>
-  );
+  )
 }
