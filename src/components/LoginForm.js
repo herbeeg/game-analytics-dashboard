@@ -12,7 +12,7 @@ export const LoginForm = () => {
   
   return redirect ? (
     // Redirect to dashboard page for authentication
-    <Redirect to='/'></Redirect>
+    <Redirect to='/dashboard'></Redirect>
   ) : (
     <Grid verticalAlign='middle' textAlign='center'>
       <Grid.Column style={{ maxWidth: 450 }}>

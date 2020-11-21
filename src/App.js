@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AuthHandler from './components/AuthHandler';
 import DashboardHome from './pages/DashboardHomePage';
@@ -11,7 +11,8 @@ function App() {
     <Switch>
       <Route exact path='/login' component={LoginPage} />
       <Route exact path='/register' component={RegisterPage} />
-      <AuthHandler exact path='/' component={DashboardHome} />
+      <AuthHandler exact path='/dashboard' component={DashboardHome} />
+      <Redirect from='/' to='/dashboard' />
     </Switch>
   );
 }
