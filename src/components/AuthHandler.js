@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 class AuthHandler extends React.Component {
   render() {
     const Component = this.props.component;
-    const isAuthenticated = false;
+    const isAuthenticated = sessionStorage.getItem('access_token');
 
     return isAuthenticated ? (
       <Component />
