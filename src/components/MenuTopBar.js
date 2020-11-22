@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 
 import logo from '../images/quartz_logo_icon.png';
@@ -36,8 +37,18 @@ export const MenuTopBar = () => {
           className='icon'
         >
           <Dropdown.Menu>
-            <Dropdown.Item text='Profile' />
-            <Dropdown.Item text='Logout' />
+            <Dropdown.Item 
+              text='Profile' 
+              as={Link} 
+              to='/profile'
+            >
+            </Dropdown.Item>
+            <Dropdown.Item 
+              text='Logout' 
+              as={Link} 
+              to='/logout'
+            >
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>
