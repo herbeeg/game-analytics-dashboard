@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Form, Grid, Image, Input, Message, Segment } from "semantic-ui-react";
 
 import logo from '../images/quartz_logo_full.png';
@@ -12,6 +13,7 @@ export const RegisterForm = () => {
 
   const [showError, setErrorState] = useState(false)
   const [errorMessages, setErrorMessage] = useState([])
+  const [showSuccess, setSuccessState] = useState(false)
 
   /*
     Clear the input fields when certain
@@ -121,7 +123,8 @@ export const RegisterForm = () => {
                     const returnMessage = await response.json()
     
                     if (response.ok) {
-                      // Redirect to login page.
+                      setErrorState(false)
+                      setSuccessState(true)
                     } else if (400 === response.status) {
                       clearInputFields()
 
@@ -145,6 +148,15 @@ export const RegisterForm = () => {
           <Message negative>
             <Message.Header>Registration error</Message.Header>
             <Message.List items={errorMessages} />
+          </Message>
+        ) : null }
+
+        { showSuccess ? (
+          <Message positive>
+            <Message.Header>User registration successful</Message.Header>
+            <p>
+              Visit the login page <Link to='/login'>here</Link> to access the dashboard.
+            </p>
           </Message>
         ) : null }
       </Grid.Column>
