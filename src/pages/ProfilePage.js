@@ -1,8 +1,12 @@
 import React from 'react';
 import { MenuTopBar } from '../components/MenuTopBar';
+import { ProfileMenu } from '../components/ProfileMenu';
 
 export default function ProfilePage() {
   return (
-    <MenuTopBar />
+    <div>
+      <MenuTopBar />
+      <ProfileMenu />
+    </div>
   );
 }
