@@ -8,25 +8,17 @@ export const MenuTopBar = () => {
   return (
     <Menu>
       <Menu.Item>
-        <Image src={logo} />
+        <Image 
+          src={logo} 
+          as='a' 
+          href='/dashboard'
+        />
       </Menu.Item>
 
       <Menu.Item
         name='live-view'
       >
         Live View
-      </Menu.Item>
-
-      <Menu.Item
-        name='matches'
-      >
-        Matches
-      </Menu.Item>
-
-      <Menu.Item
-        name='stats'
-      >
-        Stats
       </Menu.Item>
 
       <Menu.Item position='right'>
@@ -39,8 +31,8 @@ export const MenuTopBar = () => {
           <Dropdown.Menu>
             <Dropdown.Item 
               text='Profile' 
-              as={Link} 
-              to='/profile'
+              as='a' 
+              href='/profile'
             >
             </Dropdown.Item>
             <Dropdown.Item 

@@ -2,16 +2,35 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 class AuthHandler extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      update: false,
+      data: null
+    }
+  }
+
   isAuthenticated = sessionStorage.getItem('access_token');
 
-  state = {data: null}
+  path_maps = {
+    '/dashboard': '/dashboard',
+    '/profile': '/profile'
+  }
 
   componentDidMount() {
     this.getData()
   }
 
+  componentDidUpdate() {
+    if (this.state.update) {
+      this.getData()
+      this.setState({ update: false })
+    }
+  }
+
   getData() {
-    fetch(this.props.path, {
+    fetch(this.path_maps[this.props.path], {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + this.isAuthenticated
