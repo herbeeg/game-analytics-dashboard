@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Container, Menu, Segment } from 'semantic-ui-react';
+import ProfileOverview from './ProfileOverview';
 
 export const ProfileMenu = () => {
   const [active, setActive] = useState('overview')
+  const handleItemClick = (e, { name }) => switchActiveContent(name)
 
-  const handleItemClick = (e, { name }) => setActive(name)
+  function switchActiveContent(name) {
+    setActive(name)
+  }
 
   return (
     <Container>
@@ -29,11 +33,7 @@ export const ProfileMenu = () => {
       </Menu>
 
       { 'overview' === active ? (
-        <Segment>
-          <p>
-            Overview.
-          </p>
-        </Segment>
+        <ProfileOverview />
       ) : null }
       
       { 'match-history' === active ? (
