@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Menu, Segment } from 'semantic-ui-react';
+import ProfileHistory from './ProfileHistory';
 import ProfileOverview from './ProfileOverview';
 
 export const ProfileMenu = () => {
@@ -37,11 +38,7 @@ export const ProfileMenu = () => {
       ) : null }
       
       { 'match-history' === active ? (
-        <Segment>
-          <p>
-            Match history.
-          </p>
-        </Segment>
+        <ProfileHistory />
       ) : null }
 
       { 'stats' === active ? (
