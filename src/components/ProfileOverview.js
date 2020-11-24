@@ -1,7 +1,15 @@
 import React from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 
 class ProfileOverview extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      data: ''
+    }
+  }
+
   auth = sessionStorage.getItem('access_token');
 
   componentDidMount() {
@@ -9,7 +17,7 @@ class ProfileOverview extends React.Component {
   }
 
   getData() {
-    fetch('/profile/overview', {
+    fetch('/profile', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + this.auth
@@ -18,7 +26,7 @@ class ProfileOverview extends React.Component {
       (response) => response.json()
     ).then(
       (responseJson) => {
-        console.log(responseJson)
+        this.setState({ data: responseJson })
       }
     ).catch((error) => {
       console.log(error)
@@ -27,11 +35,14 @@ class ProfileOverview extends React.Component {
 
   render() {
     return (
-      <Segment>
-        <p>
-          Overview.
-        </p>
-      </Segment>
+      <Segment.Group>
+        <Segment><Header as='h5'>Overview</Header></Segment>
+        <Segment.Group>
+          <Segment>Username: {this.state.data['username']}</Segment>
+          <Segment>Email address: {this.state.data['email']}</Segment>
+          <Segment>Profile created: {this.state.data['created_at']}</Segment>
+        </Segment.Group>
+      </Segment.Group>
     )
   }
 }
