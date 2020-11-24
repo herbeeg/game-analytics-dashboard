@@ -6,7 +6,8 @@ class ProfileHistory extends React.Component {
     super(props)
 
     this.state = {
-      data: ''
+      data: '',
+      loading: true
     }
   }
 
@@ -26,8 +27,10 @@ class ProfileHistory extends React.Component {
       (response) => response.json()
     ).then(
       (responseJson) => {
-        this.setState({ data: responseJson })
-        console.log(this.state.data)
+        this.setState({ 
+          data: responseJson,
+          loading: false
+        })
       }
     ).catch((error) => {
       console.log(error)
@@ -48,7 +51,7 @@ class ProfileHistory extends React.Component {
       <Segment.Group>
         <Segment><Header as='h5'>History</Header></Segment>
         <Segment.Group>
-        <Segment>{this.state.data['message']}</Segment>
+        <Segment loading={this.state.loading}>{this.state.data['message']}</Segment>
         </Segment.Group>
       </Segment.Group>
     )

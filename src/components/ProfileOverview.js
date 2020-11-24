@@ -6,7 +6,8 @@ class ProfileOverview extends React.Component {
     super(props)
 
     this.state = {
-      data: ''
+      data: '',
+      loading: true
     }
   }
 
@@ -26,7 +27,10 @@ class ProfileOverview extends React.Component {
       (response) => response.json()
     ).then(
       (responseJson) => {
-        this.setState({ data: responseJson })
+        this.setState({ 
+          data: responseJson,
+          loading: false
+        })
       }
     ).catch((error) => {
       console.log(error)
@@ -38,9 +42,9 @@ class ProfileOverview extends React.Component {
       <Segment.Group>
         <Segment><Header as='h5'>Overview</Header></Segment>
         <Segment.Group>
-          <Segment>Username: {this.state.data['username']}</Segment>
-          <Segment>Email address: {this.state.data['email']}</Segment>
-          <Segment>Profile created: {this.state.data['created_at']}</Segment>
+          <Segment loading={this.state.loading}>Username: {this.state.data['username']}</Segment>
+          <Segment loading={this.state.loading}>Email address: {this.state.data['email']}</Segment>
+          <Segment loading={this.state.loading}>Profile created: {this.state.data['created_at']}</Segment>
         </Segment.Group>
       </Segment.Group>
     )
