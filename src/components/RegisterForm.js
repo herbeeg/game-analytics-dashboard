@@ -9,7 +9,7 @@ export const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [activationKey, setActivationKey] = useState('')
+  const [activation_key, setActivationKey] = useState('')
 
   const [showError, setErrorState] = useState(false)
   const [errorMessages, setErrorMessage] = useState([])
@@ -80,7 +80,7 @@ export const RegisterForm = () => {
                 icon='user secret' 
                 iconPosition='left' 
                 placeholder='Activation key' 
-                value={activationKey} 
+                value={activation_key} 
                 onChange={e => setActivationKey(e.target.value)} 
               />
             </Form.Field>
@@ -89,7 +89,7 @@ export const RegisterForm = () => {
               fluid 
               type='submit' 
               onClick={async () => {
-                const user = {email, username, password, activationKey};
+                const user = {email, username, password, activation_key};
                 const passwordMatch = /[a-zA-Z0-9]{8,}$/gm
 
                 if (! email) {
@@ -107,11 +107,12 @@ export const RegisterForm = () => {
                   ])
 
                   clearInputFields()
-                } else if (! activationKey) {
+                } else if (! activation_key) {
                   setErrorState(true)
                   setErrorMessage(['Missing activation token field.'])
                 } else {
                   if (passwordConfirm === password) {
+                    console.log(JSON.stringify(user))
                     const response = await fetch('/register', {
                       method: 'POST',
                       headers: {
