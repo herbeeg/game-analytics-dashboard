@@ -40,7 +40,6 @@ class AuthHandler extends React.Component {
     ).then(
       (responseJson) => {
         this.setState({ data: responseJson })
-        console.log(responseJson)
       }
     ).catch((error) => {
       console.log(error)
