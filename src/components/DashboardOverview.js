@@ -9,7 +9,7 @@ class DashboardOverview extends React.Component {
     this.state = {
       data: '',
       liveMatches: [],
-      previousMatches: [],
+      previousMatches: null,
       loading: true
     }
   }
@@ -32,8 +32,7 @@ class DashboardOverview extends React.Component {
     ).then(
       (responseJson) => {
         this.setState({ 
-          data: responseJson,
-          loading: false
+          data: responseJson
         })
       }
     ).catch((error) => {
@@ -52,7 +51,8 @@ class DashboardOverview extends React.Component {
     ).then(
       (responseJson) => {
         this.setState({ 
-          previousMatches: responseJson['match_history']
+          previousMatches: responseJson['match_history'],
+          loading: false
         })
       }
     ).catch((error) => {
@@ -65,16 +65,16 @@ class DashboardOverview extends React.Component {
       <Container>
         <Header as='h2'>Welcome back, User!</Header>
         <div>
-          <Segment vertical>
+          <Segment loading={this.state.loading} vertical>
             <Header as='h3'>Live matches</Header>
           </Segment>
           <MatchList matches='' />
         </div>
         <div>
-          <Segment vertical>
+          <Segment loading={this.state.loading} vertical>
             <Header as='h3'>Previous matches</Header>
           </Segment>
-          <MatchList matches={[{name: 'Match 1'}]} />
+          {null !== this.state.previousMatches ? <MatchList matches={this.state.previousMatches} /> : <div></div>}
         </div>
       </Container>
     )
