@@ -51,7 +51,7 @@ class ProfileHistory extends React.Component {
       <Segment.Group>
         <Segment><Header as='h5'>History</Header></Segment>
         <Segment.Group>
-        <Segment loading={this.state.loading}>{this.state.data['message']}</Segment>
+        <Segment loading={this.state.loading}>No previous matches found.</Segment>
         </Segment.Group>
       </Segment.Group>
     )

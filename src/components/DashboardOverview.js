@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header, Segment } from 'semantic-ui-react';
+import MatchList from './MatchList';
 
 class DashboardOverview extends React.Component {
   constructor(props) {
@@ -41,6 +42,18 @@ class DashboardOverview extends React.Component {
     return (
       <Container>
         <Header as='h2'>Welcome back, User!</Header>
+        <div>
+          <Segment vertical>
+            <Header as='h3'>Live matches</Header>
+          </Segment>
+          <MatchList matches='' />
+        </div>
+        <div>
+          <Segment vertical>
+            <Header as='h3'>Previous matches</Header>
+          </Segment>
+          <MatchList matches='' />
+        </div>
       </Container>
     )
   }
