@@ -7,7 +7,8 @@ class AuthHandler extends React.Component {
 
     this.state = {
       update: false,
-      data: null
+      data: null,
+      sessionExpired: false
     }
   }
 
@@ -39,15 +40,31 @@ class AuthHandler extends React.Component {
       (response) => response.json()
     ).then(
       (responseJson) => {
-        this.setState({ data: responseJson })
+        this.setState({ 
+          data: responseJson 
+        })
+        
+        if ('Token has expired' === this.state.data['msg']) {
+          this.setState({
+            sessionExpired: true
+          })
+        }
       }
     ).catch((error) => {
-      console.log(error)
+      this.setState({
+        sessionExpired: true
+      })
     });
   }
 
   render() {
     const Component = this.props.component
+
+    if (this.state.sessionExpired) {
+      return (
+        <Redirect to='/logout' />
+      )
+    }
 
     return this.isAuthenticated ? (
       <Component />

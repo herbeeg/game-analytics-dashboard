@@ -16,9 +16,11 @@ export const MenuTopBar = () => {
       </Menu.Item>
 
       <Menu.Item
-        name='live-view'
+        name='dashboard' 
+        as='a' 
+        href='/dashboard'
       >
-        Live View
+        Dashboard
       </Menu.Item>
 
       <Menu.Item position='right'>
