@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Menu, Segment } from 'semantic-ui-react';
+import { Container, Menu } from 'semantic-ui-react';
 import ProfileHistory from './ProfileHistory';
 import ProfileOverview from './ProfileOverview';
+import ProfileStats from './ProfileStats';
 
 export const ProfileMenu = () => {
   const [active, setActive] = useState('overview')
@@ -42,11 +43,7 @@ export const ProfileMenu = () => {
       ) : null }
 
       { 'stats' === active ? (
-        <Segment>
-          <p>
-            Statistics.
-          </p>
-        </Segment>
+        <ProfileStats />
       ) : null }
     </Container>
   )
