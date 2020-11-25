@@ -8,6 +8,8 @@ class DashboardOverview extends React.Component {
 
     this.state = {
       data: '',
+      liveMatches: [],
+      previousMatches: [],
       loading: true
     }
   }
@@ -16,6 +18,7 @@ class DashboardOverview extends React.Component {
 
   componentDidMount() {
     this.getData()
+    this.getPreviousMatches()
   }
 
   getData() {
@@ -38,6 +41,25 @@ class DashboardOverview extends React.Component {
     });
   }
 
+  getPreviousMatches() {
+    fetch('/profile/history', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + this.auth
+      }
+    }).then(
+      (response) => response.json()
+    ).then(
+      (responseJson) => {
+        this.setState({ 
+          previousMatches: responseJson['match_history']
+        })
+      }
+    ).catch((error) => {
+      console.log(error)
+    });
+  }
+
   render() {
     return (
       <Container>
@@ -52,7 +74,7 @@ class DashboardOverview extends React.Component {
           <Segment vertical>
             <Header as='h3'>Previous matches</Header>
           </Segment>
-          <MatchList matches='' />
+          <MatchList matches={[{name: 'Match 1'}]} />
         </div>
       </Container>
     )

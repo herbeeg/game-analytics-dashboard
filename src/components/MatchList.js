@@ -9,6 +9,8 @@ class MatchList extends React.Component {
       data: this.props.matches,
       loading: true
     }
+
+    console.log(this.state.data)
   }
 
   auth = sessionStorage.getItem('access_token');
@@ -22,13 +24,15 @@ class MatchList extends React.Component {
       )
     }
 
-    this.state.data.map((match, i) => {
-      return (
-        <Segment vertical>
-          Match segment.
-        </Segment>
-      )
-    })
+    return (
+      <div>
+        {this.state.data.map((match) => (
+          <Segment vertical>
+            {match['name']}
+          </Segment>
+        ))}
+      </div>
+    )
   }
 }
 

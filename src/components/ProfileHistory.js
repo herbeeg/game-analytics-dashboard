@@ -42,9 +42,9 @@ class ProfileHistory extends React.Component {
       <Segment.Group>
         <Segment><Header as='h5'>History</Header></Segment>
         <Segment.Group>
-          <Segment>Username: {this.state.data['username']}</Segment>
-          <Segment>Email address: {this.state.data['email']}</Segment>
-          <Segment>Profile created: {this.state.data['created_at']}</Segment>
+          <Segment>A</Segment>
+          <Segment>B</Segment>
+          <Segment>C</Segment>
         </Segment.Group>
       </Segment.Group>
     ) : (
